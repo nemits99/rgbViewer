@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic RGB Color Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(0,0,0);
+      color: #fff;
+    }
+    .container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+      width: 350px;
+    }
+
+    input::placeholder {
+      font-size: 16px;
+    }
+
+    input {
+      font-size: 32px;
+      font-weight: bold;
+      padding: 10px;
+      width: 80%;
+      text-align: center;
+    }
+    a{
+      color: white;
+    }
+  </style>
+</head>
+<body>
+ 
+  <div class="container">
+    <a href="index.html">Dashboard</a>
+    <h2>RGB Color Viewer</h2>
+    <input type="text" id="colorInput" placeholder="Enter RGB (e.g., 300,-20,500)" oninput="displayColor()">
+  </div>
+  <script>
+    function normalizeColor(value) {
+      return Math.max(0, Math.min(255, parseInt(value))); 
+    }
+
+    function displayColor() {
+      const colorInput = document.getElementById("colorInput").value;
+      const rgbPattern = /^([-]?\d+),([-]?\d+),([-]?\d+)$/;
+      const match = colorInput.match(rgbPattern);
+
+      if (match) {
+        const r = normalizeColor(match[1]);
+        const g = normalizeColor(match[2]);
+        const b = normalizeColor(match[3]);
+
+        // Ubah warna latar belakang body
+        document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+      } else {
+        document.body.style.backgroundColor = "rgb(100, 0, 0)";
+      }
+    }
+  </script>
+</body>
+</html>
